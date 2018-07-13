@@ -1,0 +1,93 @@
+
+Explain how to implement two stacks in one array AŒ1 : : n in such a way that
+neither stack overflows unless the total number of elements in both stacks together
+is n. The PUSH and POP operations should run in O.1/ time.
+
+
+///////////////////////////////////////
+
+
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+void push(int arr[],string s,int &t1,int &t2,int val)
+{
+	if(s=="s1")
+	{
+		if(t1<t2)
+		{
+			arr[t1]=val;
+			++t1;
+		}
+		else 
+		cout<<"\nOverflow "<< val;
+	}
+	else
+	{
+		if(t2>t1)
+		{
+			arr[t2]=val;
+			--t2;
+		}
+		else
+		cout<<"\nOverflow "<< val;
+	}
+}
+
+void pop(int arr[],string s,int &t,int n)
+{
+	if(s=="s1")
+	{
+		if(t!=(-1))
+		{
+			cout<<"\nPopped is : "<<arr[t];
+			arr[t--];
+		}
+		else
+		cout<<"\nUnderflow";
+	}
+	else
+	{
+		if(t!=n)
+		{
+			cout<<"\n popped is : "<<arr[t];
+			arr[t++];
+		}
+		else
+		cout<<"\nUnderflow";
+	}
+}
+int main()
+{
+	cout<<"Enter the length of array : ";
+	int n;
+	cin>>n;
+	int arr[n];
+	
+	string s1="s1",s2="s2";
+	int b1=0,b2=n-1;
+	int t1=0,t2=n-1;
+	
+	push(arr,s1,t1,t2,7);
+	push(arr,s2,t1,t2,11);
+	push(arr,s1,t1,t2,32);
+	push(arr,s2,t1,t2,51);
+	push(arr,s1,t1,t2,76);
+	push(arr,s2,t1,t2,61);
+	push(arr,s1,t1,t2,19);
+	push(arr,s2,t1,t2,21);
+	push(arr,s1,t1,t2,71);
+	push(arr,s2,t1,t2,112);
+	push(arr,s1,t1,t2,41);
+	push(arr,s2,t1,t2,22);
+	
+	pop(arr,s2,t2,n);
+	pop(arr,s1,t1,n);
+	pop(arr,s2,t2,n);
+	pop(arr,s1,t1,n);
+	pop(arr,s2,t2,n);
+	pop(arr,s1,t1,n);
+	
+}
