@@ -1,0 +1,91 @@
+// write a function to insert element in a tree using level-wise insertion
+
+#include<iostream>
+#include<queue>
+using namespace std;
+
+struct node{
+	int data;
+	node* left;
+	node* right;
+};
+
+void push(node** root,int data)
+{
+	node* temp=new node();
+	temp->data=data;
+	temp->left=NULL;
+	temp->right=NULL;
+	
+	if(*root==NULL)
+	{
+		*root=temp;
+		return;
+	}
+	
+	queue<node* >q;
+	q.push(*root);
+	
+	while(!q.empty())
+	{
+		node *t=q.front();
+		q.pop();
+		if(t->left==NULL)
+		{
+			t->left=temp;
+			return;
+		}
+		else
+		{
+			q.push(t->left);
+		}
+		if(t->right==NULL)
+		{
+			t->right=temp;
+			return;
+		}
+		else
+		q.push(t->right);
+	}
+}
+
+void print(node *root)
+{
+	if(!root)
+	return;
+	queue<node*>q;
+	q.push(root);
+	cout<<root->data<<" ";
+	while(!q.empty())
+	{
+		node* t=q.front();
+		q.pop();
+		if(t->left)
+		{
+			cout<<t->left->data<<" ";
+			q.push(t->left);
+		}
+		if(t->right)
+		{
+			cout<<t->right->data<<" ";
+			q.push(t->right);
+		}
+	}
+}
+int main()
+{
+	node *root=NULL;
+	push(&root,1);
+	push(&root,2);
+	push(&root,3);
+	push(&root,4);
+	push(&root,5);
+	push(&root,6);
+	push(&root,7);
+	push(&root,8);
+	push(&root,9);
+	push(&root,10);
+	
+	print(root);
+	
+}
