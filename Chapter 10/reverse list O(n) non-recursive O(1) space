@@ -1,0 +1,74 @@
+// write a program to reverse a linked list in O(n) time 
+// it should be a non-recursive method and should take constant space
+
+#include<iostream>
+using namespace std;
+
+struct node{
+	int data;
+	node * next;
+};
+
+void push(node**head,int data)
+{
+	node * temp=new node();
+	temp->data=data;
+	temp->next=NULL;
+	
+	if(!(*head))
+	*head=temp;
+	
+	else
+	{
+		temp->next=*head;
+		*head=temp;
+	}
+}
+node* reverse(node *head)
+{
+	if(!head)
+	return NULL;
+	node*current=head;
+	node *Next;
+	node *prev=NULL;
+	
+	while(current)
+	{
+		Next=current->next;
+		current->next=prev;
+		prev=current;
+		current=Next;
+	}
+	
+	return prev;
+	
+}
+
+void print(node *head)
+{
+	if(!head)
+	return;
+	
+	node * trav=head;
+	while(trav)
+	{
+		cout<<trav->data<<" ";
+		trav=trav->next;
+	}
+}
+
+int main()
+{
+	node *head=NULL;
+	
+	
+	push(&head,10);
+	push(&head,20);
+	push(&head,30);
+	push(&head,40);
+	push(&head,58);
+	print(head);
+	head=reverse(head);
+	cout<<"\nNow reverse is : \n";
+	print(head);
+}
