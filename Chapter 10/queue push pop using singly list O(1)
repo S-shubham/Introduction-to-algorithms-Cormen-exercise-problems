@@ -1,0 +1,74 @@
+#include<iostream>
+using namespace std;
+
+struct node{
+	int data;
+	node *next;
+};
+
+class stack{
+	public:
+	node *head=NULL;
+	node *tail=NULL;
+	
+	void push(int data)
+	{
+		node * temp=new node();
+		temp->data=data;
+		temp->next=NULL;
+		
+		if(!head)
+		{
+			head=temp;
+			tail=temp;
+			return;
+		}
+		else
+		{
+			tail->next=temp;
+			tail=tail->next;
+			
+		}
+	}
+	
+	int pop()
+	{
+		if(!head)
+		{
+			cout<<"\nUnderflow ";
+			return -1;
+		}
+		else
+		{
+			int d=head->data;
+			node* t=head;
+			head=head->next;
+			delete(t);
+			return d;
+		}
+	}
+};
+
+int main()
+{
+	stack s1;
+	s1.push(10);
+	s1.push(20);
+	s1.push(30);
+	s1.push(40);
+	cout<<s1.pop()<<"\n ";
+	cout<<s1.pop()<<"\n ";
+	s1.push(58);
+	cout<<s1.pop()<<"\n ";
+	
+	stack s2;
+	s2.push(11);
+	s2.push(22);
+	s2.push(33);
+	s2.push(44);
+	s2.push(55);
+	cout<<s2.pop()<<"\n ";
+	cout<<s2.pop()<<"\n ";
+	cout<<s1.pop()<<"\n ";
+	
+}
